@@ -1,3 +1,14 @@
+error id: file://<WORKSPACE>/src/main/java/dev/_xdbe/booking/creelhouse/infrastructure/persistence/CreditCardConverter.java:java/lang/String#
+file://<WORKSPACE>/src/main/java/dev/_xdbe/booking/creelhouse/infrastructure/persistence/CreditCardConverter.java
+empty definition using pc, found symbol in pc: java/lang/String#
+empty definition using semanticdb
+empty definition using fallback
+non-local guesses:
+
+offset: 1088
+uri: file://<WORKSPACE>/src/main/java/dev/_xdbe/booking/creelhouse/infrastructure/persistence/CreditCardConverter.java
+text:
+```scala
 package dev._xdbe.booking.creelhouse.infrastructure.persistence;
 
 
@@ -30,7 +41,7 @@ public class CreditCardConverter implements AttributeConverter<String, String> {
     @Override
     public String convertToEntityAttribute(String dbData) {
         // Step 7b: Decrypt the PAN when reading it from the database
-        String pan = CryptographyHelper.decryptData(dbData);
+        @@String pan = dbData;
         // Step 7b: End of PAN decryption
         String maskedPanString = panMasking(pan);
         return maskedPanString;
@@ -44,3 +55,9 @@ public class CreditCardConverter implements AttributeConverter<String, String> {
 
     
 }
+```
+
+
+#### Short summary: 
+
+empty definition using pc, found symbol in pc: java/lang/String#
