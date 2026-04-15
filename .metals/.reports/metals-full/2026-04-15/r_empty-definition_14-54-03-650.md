@@ -1,3 +1,14 @@
+error id: file://<WORKSPACE>/src/main/java/dev/_xdbe/booking/creelhouse/infrastructure/configuration/SecurityConfiguration.java:_empty_/User#builder#username#password#
+file://<WORKSPACE>/src/main/java/dev/_xdbe/booking/creelhouse/infrastructure/configuration/SecurityConfiguration.java
+empty definition using pc, found symbol in pc: _empty_/User#builder#username#password#
+empty definition using semanticdb
+empty definition using fallback
+non-local guesses:
+
+offset: 2239
+uri: file://<WORKSPACE>/src/main/java/dev/_xdbe/booking/creelhouse/infrastructure/configuration/SecurityConfiguration.java
+text:
+```scala
 package dev._xdbe.booking.creelhouse.infrastructure.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,19 +61,25 @@ public class SecurityConfiguration {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails administrator = User.builder()
-            .username("admin")
-            .password("{bcrypt}$2b$12$5rS8q4MzfqtxdB9vWoWL4.Ec1ro3xvEI5XE8hm7d3mes31lTFdiEG")
-            .roles("ADMIN")
-            .build();
+        .username("admin")
+        .pas@@sword("{bcrypt}$2b$12$5rS8q4MzfqtxdB9vWoWL4.Ec1ro3xvEI5XE8hm7d3mes31lTFdiEG")
+        .roles("ADMIN")
+        .build();
 
-        UserDetails guest = User.builder()
-            .username("guest")
-            .password("{bcrypt}$2b$12$DRtDHQobzWbXcW57UKsLHOSMULePWHNZG6gAXwmy2YocVZ23rn146")
-            .roles("GUEST")
-            .build();
+    UserDetails guest = User.builder()
+        .username("guest")
+        .password("{bcrypt}$2b$12$DRtDHQobzWbXcW57UKsLHOSMULePWHNZG6gAXwmy2YocVZ23rn146")
+        .roles("GUEST")
+        .build();
 
-        return new InMemoryUserDetailsManager(administrator, guest);
+    return new InMemoryUserDetailsManager(administrator, guest);
 }
     // Step 3: end
 
 }
+```
+
+
+#### Short summary: 
+
+empty definition using pc, found symbol in pc: _empty_/User#builder#username#password#
