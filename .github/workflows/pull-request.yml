@@ -1,0 +1,70 @@
+name: pull-request
+
+on:
+  pull_request:
+
+permissions:
+  actions: read
+  security-events: write
+  contents: read
+
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: run osv-scanner after PR
+        uses: google/osv-scanner-action/osv-scanner-action@v2.3.5
+        with:
+          scan-args: |-
+            --format sarif
+            --output DependenciesAnalysis.sarif
+            ./
+        continue-on-error: true
+
+      - name: checkout baseline commit
+        run: git checkout ${{ github.event.pull_request.base.sha }}
+
+      - name: run osv-scanner before PR
+        uses: google/osv-scanner-action/osv-scanner-action@v2.3.5
+        with:
+          scan-args: |-
+            --format sarif
+            --output DependenciesAnalysisBaseline.sarif
+            ./
+        continue-on-error: true
+
+      - name: compare analysis
+        uses: google/osv-scanner-action/osv-reporter-action@v2.3.5
+        with:
+          scan-args: |-
+            --new DependenciesAnalysis.sarif
+            --old DependenciesAnalysisBaseline.sarif
+            --output DependenciesAnalysisDiff.sarif
+        continue-on-error: true
+
+      - name: save report
+        uses: actions/upload-artifact@v4
+        with:
+          name: DependenciesAnalysisDiff
+          path: DependenciesAnalysisDiff.sarif
+
+  source-code-analysis:
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep@sha256:7810f1d7884974ab6dda7bef8f4a2c8e165ea2142fd8260515d380e4f1407263
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: run semgrep
+        run: semgrep --config .semgrep --sarif --output SourceCodeAnalysis.sarif --baseline-commit ${{ github.event.pull_request.base.sha }} .
+        continue-on-error: true
+
+      - name: save report
+        uses: actions/upload-artifact@v4
+        with:
+          name: SourceCodeAnalysis
+          path: SourceCodeAnalysis.sarif
