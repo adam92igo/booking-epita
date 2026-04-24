@@ -101,4 +101,5 @@ panMasking	./src/main/java/dev/_xdbe/booking/creelhouse/infrastructure/persisten
 save	./src/main/java/dev/_xdbe/booking/creelhouse/domain/port/BookingRepository.java	/^  Booking save(Booking booking);$/;"	m	interface:BookingRepository
 save	./src/main/java/dev/_xdbe/booking/creelhouse/infrastructure/persistence/BookingDatabaseRepository.java	/^    public Booking save(Booking booking) {$/;"	m	class:BookingDatabaseRepository
 toBooking	./src/main/java/dev/_xdbe/booking/creelhouse/infrastructure/persistence/BookingEntity.java	/^    public Booking toBooking() {$/;"	m	class:BookingEntity
+userDetailsService	./src/main/java/dev/_xdbe/booking/creelhouse/infrastructure/configuration/SecurityConfiguration.java	/^    public UserDetailsService userDetailsService() {$/;"	m	class:SecurityConfiguration
 warn	./gradlew	/^warn () {$/;"	f
